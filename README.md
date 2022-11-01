@@ -8,7 +8,7 @@ Builded with love :purple_heart: and flatkit
 
 ## Getting started
 
-### ❕ Attention! This repository is part of a production package for Raspberry Pi-based servers.
+### ❕ Attention! This repository is part of a production package for RPi-based servers.
 
 For further information, please refer to :point_right: [the following repository](https://github.com/CosmosKiller/cosmosIoT-ProdServer)
 
