@@ -61,9 +61,7 @@ if(isset($_POST['email']) && isset($_POST['password']))
     }
   }
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
