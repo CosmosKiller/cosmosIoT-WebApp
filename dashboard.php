@@ -351,9 +351,8 @@
                   </thead>
                   <tbody>
 
-                    <?php foreach ($devices as $device){ ?>
-                    <!-- We genrate a row for each device -->
-                    <?php $dev = substr($device['devices_serial'], 6, 7) ?>
+                  <!-- We genrate a row for each device -->
+                  <?php foreach ($devices as $device){ ?>
                     <!-- We check if the device is a sensor-->
                     <?php if (substr($device['devices_serial'], 0, 3) == "SNR") { ?>
                    
@@ -363,14 +362,14 @@
                         For the particular case of a temperature and humudity sensor (usually DTH22 
                         or DHT11) we create two individual rows for each value out of the same device.
                         This is, so that we can display each indivual reading of the sensor.
-                        -->
+                    -->
                     <?php if (substr($device['devices_serial'], 3, 2) == "Th"){ ?>
                     <tr>
                       <td>
                         <?php echo utf8_encode(($device['owners_devAlias'])) ?>
                       </td>
                       <td><i class="material-icons md-24">&#xe430;</i> Temperatura</td>
-                      <td><b id="<?php echo " tempDisplay".$dev ?>" href ="">-- </b><span class="text-sm"> °C</span>
+                      <td><b id="<?php echo " tempDisplay".$device['devices_serial'] ?>" href ="">-- </b><span class="text-sm"> °C</span>
                       </td>
                     </tr>
 
@@ -379,38 +378,39 @@
                         <?php echo utf8_encode(($device['owners_devAlias'])) ?>
                       </td>
                       <td><i class="material-icons md-24">&#xe42d;</i> Humedad relativa</td>
-                      <td><b id="<?php echo " humDisplay".$dev ?>" href ="">-- </b><span class="text-sm"> %</span></td>
+                      <td><b id="<?php echo " humDisplay".$device['devices_serial'] ?>" href ="">-- </b><span class="text-sm"> %</span></td>
                     </tr>
                     <?php continue; } ?>
 
                     <!-- For the other subtypes we only create one row for each device -->
                     <tr>
                       <td>
-                        <?php echo utf8_encode(($device['owners_devAlias'])) ?>
+                      <?php echo utf8_encode(($device['owners_devAlias'])) ?>
                       </td>
 
                       <?php if (substr($device['devices_serial'], 3, 2) == "Fh"){ ?>
                       <td><i class="material-icons md-24">&#xe42d;</i> Humedad del suelo</td>
-                      <td><b id="<?php echo " fhDisplay".$dev ?>" href ="">-- </b><span class="text-sm"> %</td>
+                      <td><b id="<?php echo " fhDisplay".$device['devices_serial'] ?>" href ="">-- </b><span class="text-sm"> %</span><</td>
 
                       <?php } elseif (substr($device['devices_serial'], 3, 2) == "Vo"){ ?>
                       <td><i class="material-icons md-24">&#xe3e7;</i> Voltaje</td>
-                      <td><b id="<?php echo " voDisplay".$dev ?>" href ="">-- </b><span class="text-sm"> V</td>
+                      <td><b id="<?php echo " voDisplay".$device['devices_serial'] ?>" href ="">-- </b><span class="text-sm"> V</span><</td>
 
                       <?php } elseif (substr($device['devices_serial'], 3, 2) == "Li"){ ?>
                       <td><i class="material-icons md-24">&#xe3ab;</i> Luz ambiente</td>
-                      <td><b id="<?php echo " liDisplay".$dev ?>" href ="">-- </b><span class="text-sm"> cd</td>
+                      <td><b id="<?php echo " liDisplay".$device['devices_serial'] ?>" href ="">-- </b><span class="text-sm"> cd</span><</td>
 
                       <?php } elseif (substr($device['devices_serial'], 3, 2) == "Po"){ ?>
                       <td><i class="material-icons md-24">&#xe002;</i> Polución</td>
-                      <td><b id="<?php echo " poDisplay".$dev ?>" href ="">-- </b><span class="text-sm"> ppm</td>
+                      <td><b id="<?php echo " poDisplay".$device['devices_serial'] ?>" href ="">-- </b><span class="text-sm"> ppm</span><</td>
 
                       <?php } elseif (substr($device['devices_serial'], 3, 2) == "Wl"){ ?>
-                      <td><i class="material-icons md-24">&#xee891;</i> Nivel de agua</td>
-                      <td><b id="<?php echo " humDisplay".$dev ?>" href ="">-- </b><span class="text-sm"> mts</td>
+                      <td><i class="material-icons md-24">&#xe891;</i> Nivel de agua</td>
+                      <td><b id="<?php echo " wlDisplay".$device['devices_serial'] ?>" href ="">-- </b><span class="text-sm"> mts</span><</td>
                       <?php } ?>
-                      </tra <?php } ?>
-                      <?php } ?>
+                    </tr>
+                    <?php } ?>
+                  <?php } ?>
 
                   </tbody>
                 </table>
@@ -434,13 +434,14 @@
                       <th>Alias</th>
                       <th>Activar</th>
                       <th>Status</th>
+                      <th>Info</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php foreach ($devices as $device) { ?>
                       <?php $dev = substr($device['devices_serial'], 6, 7) ?>
                       <!-- We check if the device is a sensor-->
-                      <?php if (substr($device['devices_serial'], 0, 3) == "MOT") { ?>
+                      <?php if (substr($device['devices_serial'], 0, 3) == "MOT" || substr($device['devices_serial'], 0, 5) == "SKTPc") { ?>
                       <tr>
                         <td>
                           <?php echo utf8_encode(($device['owners_devAlias'])) ?>
@@ -455,8 +456,10 @@
                           </button>
                         </td>
                         <td>
-                          <!-- This last column displays an indicator to show the current status of the device -->
+                          <!-- This column displays an indicator to show the current status of the device -->
                           <i id="<?php echo $device['devices_serial']?>" class="material-icons md-24">&#xe8ac;</i>
+                          <!-- This last columns shows info sent from the devices -->
+                          <td><b id="<?php echo "actDisplay".$device['devices_serial'] ?>" href ="">-- </b></td>
                         </td>
                       </tr>
                       <?php } ?>

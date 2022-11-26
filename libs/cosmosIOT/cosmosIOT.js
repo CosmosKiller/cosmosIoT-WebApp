@@ -41,7 +41,7 @@ function msgRecieved(topic, message, data) {
     var serial_number = splitted_topic[0];
     var type = splitted_topic[1];
 
-    if (type == "Sensors") {
+    if (type == "Sensors" || type == "Sockets" || type == "Motors") {
         var subtype = splitted_topic[2];
         var splitted_msg = msg.split(",");
         var userId = splitted_msg[0];
@@ -54,16 +54,18 @@ function msgRecieved(topic, message, data) {
                 $("#tempDisplay" + devSn).html(value1);
                 $("#humDisplay" + devSn).html(value2);
             }
-            else if (subtype = "Fh")
+            else if (subtype == "Fh")
                 $("#fhDisplay" + devSn).html(value1);
-            else if (subtype = "Vo")
+            else if (subtype == "Vo")
                 $("#voDisplay" + devSn).html(value1);
-            else if (subtype = "Li")
+            else if (subtype == "Li")
                 $("#liDisplay" + devSn).html(value1);
-            else if (subtype = "Po")
+            else if (subtype == "Po")
                 $("#poDisplay" + devSn).html(value1);
-            else if (subtype = "Wl")
+            else if (subtype == "Wl")
                 $("#wlDisplay" + devSn).html(value1);
+            else if (subtype == "Sv" || subtype == "Pc")
+                $("#actDisplay" + serial_number).html(value1);
         }
     }
 
