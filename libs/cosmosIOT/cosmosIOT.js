@@ -4,9 +4,9 @@ var refusededAudio = new Audio("mixkit-double-beep-tone-alert-2868.wav");
 // Socket controll
 function socketControll(devSerial, usersAccountID) {
     if (document.getElementById(devSerial).style.color == 'lime')
-        client.publish(devSerial + "/tx_controll", usersAccountID + ",apagado", (error) => { });
+        client.publish(devSerial + "/tx_controll/dev_action", usersAccountID + ",apagado", (error) => { });
     else
-        client.publish(devSerial + "/tx_controll", usersAccountID + ",encendido", (error) => { });
+        client.publish(devSerial + "/tx_controll/dev_action", usersAccountID + ",encendido", (error) => { });
 }
 
 // Ligth controll
@@ -17,9 +17,9 @@ function lightControll(devSerial, usersAccountID, colId, briId, command) {
     var ledValue = "," + briValue + "/" + colValue;
 
     if (command == 0 && document.getElementById(devSerial).style.color == 'lime')
-        client.publish(devSerial + "/tx_controll", usersAccountID + ",000/000/000/000/", (error) => { });
+        client.publish(devSerial + "/tx_controll/dev_action", usersAccountID + ",000/000/000/000/", (error) => { });
     else
-        client.publish(devSerial + "/tx_controll", usersAccountID + ledValue, (error) => { });
+        client.publish(devSerial + "/tx_controll/dev_action", usersAccountID + ledValue, (error) => { });
 }
 
 // Servo controll

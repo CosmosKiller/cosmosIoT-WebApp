@@ -26,13 +26,6 @@
 // {
 //   array_push($array, $device['devices_serial']);
 // }
-
-// $jsonData = json_encode(
-//   array(
-//     $user_id,
-//     $devices
-//   )
-// );
 ?>
 
 <!DOCTYPE html>
@@ -144,7 +137,6 @@
       <div ui-view class="app-body" id="view">
         <!-- SECCION CENTRAL -->
         <div class="padding">
-          
           <div class="row">
             <!--Lights -->
             <div class="col-sm-6">
@@ -181,14 +173,10 @@
                         <td>
                           <select id="<?php echo " cc_id".$device["devices_serial"]?>"
                             onchange="lightControll(
-                            '
-                            <?php echo $device["devices_serial"]?>',
-                            '
-                            <?php echo $device["users_account_id"]?>',
-                            '
-                            <?php echo "cc_id".$device["devices_serial"]?>',
-                            '
-                            <?php echo "br_id".$device["devices_serial"]?>',
+                            '<?php echo $device["devices_serial"]?>',
+                            '<?php echo $device["users_account_id"]?>',
+                            '<?php echo "cc_id".$device["devices_serial"]?>',
+                            '<?php echo "br_id".$device["devices_serial"]?>',
                             1)"
                             >
                             <!-- We create a different id for each select, using the device serial -->
@@ -213,14 +201,10 @@
                           <!-- Now for the brigthness controll, we're using a simple text input -->
                           <select id="<?php echo " br_id".$device["devices_serial"]?>"
                             onchange="lightControll(
-                            '
-                            <?php echo $device["devices_serial"]?>',
-                            '
-                            <?php echo $device["users_account_id"]?>',
-                            '
-                            <?php echo "cc_id".$device["devices_serial"]?>',
-                            '
-                            <?php echo "br_id".$device["devices_serial"]?>',
+                            '<?php echo $device["devices_serial"]?>',
+                            '<?php echo $device["users_account_id"]?>',
+                            '<?php echo "cc_id".$device["devices_serial"]?>',
+                            '<?php echo "br_id".$device["devices_serial"]?>',
                             1)"
                             >
                             <option value="100">100%</option>
@@ -239,12 +223,9 @@
                         <td>
                           <button class="btn btn-sm warn" onclick="lightControll(
                             '<?php echo $device[" devices_serial"]?>',
-                            '
-                            <?php echo $device["users_account_id"]?>',
-                            '
-                            <?php echo "cc_id".$device["devices_serial"]?>',
-                            '
-                            <?php echo "br_id".$device["devices_serial"]?>',
+                            '<?php echo $device["users_account_id"]?>',
+                            '<?php echo "cc_id".$device["devices_serial"]?>',
+                            '<?php echo "br_id".$device["devices_serial"]?>',
                             0)"
                             >
                             <i id="<?php echo " lc_id".$device["devices_serial"]?>" class="material-icons
@@ -444,14 +425,37 @@
                       <?php if (substr($device['devices_serial'], 0, 3) == "MOT" || substr($device['devices_serial'], 0, 5) == "SKTPc") { ?>
                       <tr>
                         <td>
-                          <?php echo utf8_encode(($device['owners_devAlias'])) ?>
+                          <button
+                          class="btn btn-sm success"
+                          id="<?php echo "al_edit_button".$device["devices_serial"]?>"
+                          onclick = "aliasEdit('<?php echo $device["devices_serial"]?>')"
+                          >
+                            <i id="<?php echo "pc_id".$device["devices_serial"]?>" class="material-icons md-12">&#xe3c9;</i>
+                          </button>
+
+                          <button
+                          class="btn btn-sm danger"
+                          id="<?php echo "al_cancel_button".$device["devices_serial"]?>"
+                          style="display: none;"
+                          onclick = "aliasEdit('<?php echo $device["devices_serial"]?>')"
+                          >
+                            <i id="<?php echo "pc_id".$device["devices_serial"]?>" class="material-icons md-12">&#xe14c;</i>
+                          </button>
+                          <b id="<?php echo "al_edit_b".$device["devices_serial"]?>"> <?php echo utf8_encode(($device['owners_devAlias'])) ?> </b>
+                          <input
+                          type="text" 
+                          id="<?php echo "al_edit_input".$device["devices_serial"]?>" 
+                          value="<?php echo utf8_encode(($device['owners_devAlias'])) ?>"
+                          style="display: none;"
+                          >
                         </td>
                         <td>
-                          <button class="btn btn-sm success" onclick="servoControll('<?php echo $device["
-                            devices_serial"]?>', '
-                            <?php echo $device["users_account_id"]?>')"
-                            >
-                            <!-- Indivudual id for each button, using the device serial -->
+                          <button 
+                            class="btn btn-sm success" 
+                            onclick="servoControll(
+                            '<?php echo $device["devices_serial"]?>',
+                            '<?php echo $device["users_account_id"]?>')"
+                            > <!-- Indivudual id for each button, using the device serial -->
                             I
                           </button>
                         </td>
